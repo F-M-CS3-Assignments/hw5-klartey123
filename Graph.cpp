@@ -2,12 +2,10 @@
 #include "Graph.h"
 #include <iostream>
 #include <vector>
+#include <set>
 
 
 using namespace std;
-
-
-
 
 
 
@@ -91,9 +89,21 @@ const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w
 	}
 
 	GraphEdge *ge = new GraphEdge;
+// how a new edge is created, we would go to the addedge function to update it over there too. 
+	ge->from = gnFrom;
+    ge->to = gnTo;
+    ge->weight = w;
+	// i will go through the nodes list and return the i that is gn and add it to my adjlist. 
+	size_t i = 0;
+	for ( i; i < this->nodes.size(); i++) {
+		if (this->nodes[i] == gnFrom) {
+			break;
+		}
+	}
 
-	// TODO:
-	// Do stuff here?  IDK what though
+	this->adjList[i].push_back(ge);
+	return ge;
+
 
 	const GraphEdge *response = ge; // this helps the compiler go
 	return response;
@@ -102,11 +112,18 @@ const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w
 
 bool Graph::IsPresent(nodekey_t key) const
 {
-	// TODO:
 	// iterate through this->nodes and look for one that matches key
+
+	size_t i =0;
+	while (i < this->nodes.size()) {
+		if (nodes[i] == key) {
+			return true;
+		}
+		i++;
+	}
+	return false;
+
 }
-
-
 
 
 set<const GraphEdge*> Graph::GetOutwardEdgesFrom(nodekey_t node) const 
@@ -121,12 +138,23 @@ set<const GraphEdge*> Graph::GetOutwardEdgesFrom(nodekey_t node) const
 	}
 
 
-
 	set<const GraphEdge*> result = set<const GraphEdge*>();
-	// TODO:
 	// iterate over this->adjList.at(idx); and find nodes that match the given node
 	// in their "from" field, put those nodes in result
+	size_t i =0;
+	for (i; i < nodes.size(); i ++){
+		if (nodes[i]==node){
+			break;
+		}
+	}
 
+	if (i==nodes.size() ){
+		throw invalid_argument("No such node: " + to_string(node));
+	}
+
+	for (GraphEdge* edge : this->adjList[i]) {
+		result.insert(edge);
+	}
 
 	return result;
 }
@@ -135,8 +163,14 @@ set<const GraphEdge*> Graph::GetOutwardEdgesFrom(nodekey_t node) const
 {
 	// TODOL
 	// iterate of this->nodes, accumulate into a set<nodekey_t> and return it
+	// using a set because of it's properties like no duplicates.
+	set<nodekey_t> results;
+	size_t i =0;
+	for (i; i < nodes.size(); i++){
+		results.insert(nodes[i]);
+	}
+	return results;
 }
-
 
 size_t Graph::Order() const 
 {
@@ -155,9 +189,6 @@ size_t Graph::Size() const
 
 	return total;
 }
-
-
-
 string Graph::NodesToString() const 
 {
 	if(nodes.size() == 0)
@@ -174,7 +205,6 @@ string Graph::NodesToString() const
 	str = str + "(" + to_string(nodes.at(nodes.size()-1)) + ")]";
 	return str;
 }
-
 string Graph::EdgesToString() const 
 {
 	if(this->adjList.size() == 0)
@@ -203,12 +233,16 @@ string Graph::EdgesToString() const
 	return str;
 
 }
-
-
-
 Graph::~Graph() {
 	// TODO:
 	// Right now the memory leaks are bad, I need to
 	// implement something here to fix it
+
+	for (size_t i = 0; i < adjList.size(); i++) {
+		for (size_t j = 0; j < adjList[i].size(); j++) {
+			delete adjList[i][j];
+		}
+	}
+
 }
 

@@ -72,6 +72,17 @@ void MoreDijkstraTests(){
 
 	// Your code goes here!
 
+	cout << "Test: No path between nodes" << endl;
+	Graph g1;
+	g1.AddNode(1);
+	g1.AddNode(2); 
+	assert(dijkstra(1, 2, &g1) == -1);
+
+	cout << "Test: Start and goal are the same" << endl;
+	Graph g2;
+	g2.AddNode(1);
+	assert(dijkstra(1, 1, &g2) == 0);
+
 	cout << "DONE Deep Testing Dijkstra Algorithm" << endl;
 }
 
