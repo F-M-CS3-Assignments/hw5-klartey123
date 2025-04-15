@@ -1,5 +1,4 @@
 
-
 #include "Graph.h"
 #include "BetterPriorityQueue.h"
 #include <cassert>
@@ -27,7 +26,6 @@ void ContainsTest() {
 		q.push(cur);
 		//cout << "size: " << q.size() << endl;
 	}
-	
 	
 	// 1st test
 	BPQNode positive;

@@ -20,7 +20,7 @@ int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
     }
     dist[start] = 0;
 
-    // Add start node to the priority queue
+     // Start exploring from the start node
     BPQNode startNode;
     startNode.gnode = start;
     startNode.pri = 0;
@@ -30,7 +30,7 @@ int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
         BPQNode curr = q.top();
         q.pop();
 
-        // Skip if we’ve already found a shorter path to this node
+        // if we already found a better path to this node, skip it
         if (curr.pri > dist[curr.gnode]) {
             continue;
         }
@@ -39,9 +39,12 @@ int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
             return dist[end];
         }
 
+        // Go through all the neighbors.
         for (const GraphEdge* edge : g->GetOutwardEdgesFrom(curr.gnode)) {
             nodekey_t neighbor = edge->to;
             int newDist = dist[curr.gnode] + edge->weight;
+
+            // if it’s already in the queue, update it. Otherwise push it in.
 
             if (newDist < dist[neighbor]) {
                 dist[neighbor] = newDist;
@@ -59,6 +62,6 @@ int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
         }
     }
 
-    // If we get here, there's no path to the end node
+    
     return -1;
 }

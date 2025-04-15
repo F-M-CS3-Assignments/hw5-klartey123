@@ -7,8 +7,6 @@
 
 using namespace std;
 
-
-
 // This method is not part of the Graph class / header on purpose
 const GraphEdge* findExistingEdge(nodekey_t gnFrom, nodekey_t gnTo, vector<vector<GraphEdge *>> adjList)
 {
@@ -45,10 +43,6 @@ string GraphEdgeToString(const GraphEdge* e)
 	return "((" + to_string(e->from) + ")->(" + to_string(e->to) + ") w:" + to_string(e->weight) + ")";
 }
 
-
-
-
-
 void Graph::AddNode(nodekey_t key)
 {
 
@@ -63,9 +57,6 @@ void Graph::AddNode(nodekey_t key)
 	adjList.push_back(*newRow);
 	delete newRow; // ?
 }
-
-
-
 
 const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w)
 {
@@ -89,7 +80,7 @@ const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w
 	}
 
 	GraphEdge *ge = new GraphEdge;
-// how a new edge is created, we would go to the addedge function to update it over there too. 
+// how a new edge is created.
 	ge->from = gnFrom;
     ge->to = gnTo;
     ge->weight = w;
@@ -105,7 +96,7 @@ const GraphEdge *Graph::AddEdge(nodekey_t gnFrom, nodekey_t gnTo, unsigned int w
 	return ge;
 
 
-	const GraphEdge *response = ge; // this helps the compiler go
+	const GraphEdge *response = ge; 
 	return response;
 }
 

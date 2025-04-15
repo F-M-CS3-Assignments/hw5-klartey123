@@ -5,16 +5,6 @@
 #include <queue>
 
 using namespace std;
-//contains;
-// it will check if a nodes has alrady been added 
-bool BetterPriorityQueue::Contains(const BPQNode& n) const {
-    for (const BPQNode& item : this->c) {
-        if (item == n) { 
-            return true;
-        }
-    }
-    return false;
-}
 
 // update, it will update the prioity of the node. Only if the new one is lower. 
 // then it will rebuild the heap 
@@ -38,10 +28,22 @@ bool BetterPriorityQueue::Update(const BPQNode& n) {
 
     return found;
 }
-   
+// convert a single node into a string.
 string BetterPriorityQueue::BPQNodeToString(const BPQNode& n) {
 	return "(" + to_string(n.gnode) + ", pri: " + to_string(n.pri) + ")";
 }
+
+//contains;
+// it will check if a nodes has already been added 
+bool BetterPriorityQueue::Contains(const BPQNode& n) const {
+    for (const BPQNode& item : this->c) {
+        if (item == n) { 
+            return true;
+        }
+    }
+    return false;
+}
+
 
 // the it returns the format in which the queue in the priotiy will be represnted. 
 string BetterPriorityQueue::ToString() const{

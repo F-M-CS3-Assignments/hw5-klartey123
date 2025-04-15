@@ -1,7 +1,7 @@
 all:
-	g++ -Wall -std=c++11 Graph.cpp GraphTests.cpp -o graph-tests
-	g++ -Wall -std=c++11 Graph.cpp BetterPriorityQueue.cpp BPQTests.cpp -o bpq-tests
-	g++ -Wall -std=c++11 Graph.cpp BetterPriorityQueue.cpp Dijkstra.cpp DijkstraTests.cpp -o dijkstra
+	g++ -Wall Graph.cpp GraphTests.cpp -o graph-tests
+	g++ -Wall Graph.cpp BetterPriorityQueue.cpp BPQTests.cpp -o bpq-tests
+	g++ -Wall Graph.cpp BetterPriorityQueue.cpp Dijkstra.cpp DijkstraTests.cpp -o dijkstra
 
 run-graph:
 	./graph-tests
