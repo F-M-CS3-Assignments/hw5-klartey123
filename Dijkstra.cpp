@@ -9,7 +9,7 @@
 using namespace std;
 
 // Dijkstra’s Algorithm using binary heap and adjacency list
-// Time Complexity: O((V + E) * log V)
+// Time Complexity: O(log V)
 int dijkstra(nodekey_t start, nodekey_t end, const Graph *g) {
     unordered_map<nodekey_t, int> dist;
     BetterPriorityQueue q;

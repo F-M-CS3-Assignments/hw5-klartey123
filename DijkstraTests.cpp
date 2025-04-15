@@ -2,6 +2,7 @@
 #include "Graph.h"
 #include "BetterPriorityQueue.h"
 #include "Dijkstra.h"
+#include <vector>
 
 #include <iostream>
 #include <cassert>
